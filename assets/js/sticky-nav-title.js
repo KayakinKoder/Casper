@@ -15,47 +15,4 @@
  * ```
  */
 
-(function (window, document) {
-    // set up Casper as a global object
-    if (!window.Casper) {
-        window.Casper = {};
-    }
-
-    window.Casper.stickyNavTitle = function stickyNavTitle(options) {
-        var nav = document.querySelector(options.navSelector);
-        var title = document.querySelector(options.titleSelector);
-
-        var lastScrollY = window.scrollY;
-        var ticking = false;
-
-        function onScroll() {
-            lastScrollY = window.scrollY;
-            requestTick();
-        }
-
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(update);
-            }
-            ticking = true;
-        }
-
-        function update() {
-            var trigger = title.getBoundingClientRect().top + window.scrollY;
-            var triggerOffset = title.offsetHeight + 35;
-
-            // show/hide post title
-            if (lastScrollY >= trigger + triggerOffset) {
-                nav.classList.add(options.activeClass);
-            } else {
-                nav.classList.remove(options.activeClass);
-            }
-
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', onScroll, {passive: true});
-
-        update();
-    };
-})(window, document);
+// removed scroll navbar activity on posts. This was causing main navbar elements to be hidden on scroll
