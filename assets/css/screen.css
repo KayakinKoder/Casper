@@ -196,8 +196,9 @@ body {
     margin-top: 0;
 }
 
+/* padding for the homepage header */
 .site-home-header .site-header-content {
-    padding: 5vw 3vw 6vw;
+    padding: 130px 55px 40px 55px;
 }
 
 .site-home-header .site-title {
@@ -245,8 +246,9 @@ body {
 /* Special header styles for smaller screens */
 
 @media (max-width: 900px) {
-    .site-header-content {
-        padding-bottom: 9vw;
+    /* padding for the homepage header */
+    .site-home-header .site-header-content {
+        padding: 10px 55px 20px 55px;
     }
 }
 
