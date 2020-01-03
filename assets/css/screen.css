@@ -65,13 +65,13 @@ body {
     flex-grow: 1;
 }
 
-/* Full width page blocks */
+/* Full width page blocks, margin is preffered for fixed position elements */
 .outer {
     position: relative;
-    padding: 0 5vw;
+    margin: 0 5vw;
 }
 
-/* Centered content container blocks */
+/* Centered content container blocks with hack for fixed header width */
 .inner {
     margin: 0 auto;
     max-width: 1040px;
@@ -101,7 +101,10 @@ body {
     }
 
     .home-template .site-nav {
-        position: relative;
+        position: fixed;
+	background: #fff;
+	width: 90%;
+	max-width: 1040px;
     }
 }
 
@@ -113,8 +116,8 @@ body {
     position: relative;
     margin-top: 64px;
     padding-bottom: 12px;
-    color: #fff;
-    background: color(var(--darkgrey) l(-5%)) no-repeat center center;
+    color: color(var(--darkgrey) l(-5%));
+    background: #fff no-repeat center center;
     background-size: cover;
 }
 
@@ -161,7 +164,7 @@ body {
 
 .site-title {
     z-index: 10;
-    margin: 0 0 0 -2px;
+    margin: 63px 0 -2px 0;
     padding: 0;
     font-size: 5.0rem;
     line-height: 1em;
@@ -262,6 +265,7 @@ body {
 }
 
 
+
 /* 5. Site Navigation
 /* ---------------------------------------------------------- */
 
@@ -271,24 +275,25 @@ body {
     right: 0;
     left: 0;
     z-index: 1000;
-    background: color(var(--darkgrey) l(-5%));
+    background: #fff; /* color(var(--darkgrey) l(-5%)); */
 }
 
 .site-nav {
     position: relative;
     z-index: 100;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    overflow-y: hidden;
-    height: 64px;
-    font-size: 1.3rem;
+    justify-content: space-between; /* horisontal aligment */
+    align-items: center; /*vertical aligment */
+    overflow: hidden;
+    height: 83px; /*increased menu vertical size to accomodate logo and text*/
+    font-size: 1.7rem;
 }
 
 .site-nav-left-wrapper {
     position: relative;
     flex: 1 0 auto;
     display: flex;
+    order: 0;
 }
 
 .site-header-background:not(.responsive-header-img) .site-nav-left-wrapper:after,
@@ -297,14 +302,15 @@ body {
     position: absolute;
     top: 0;
     z-index: 1000;
-    width: 40px;
-    height: 100%;
+    width: 0;
+    height: 0;
 }
 
 .site-header-background:not(.responsive-header-img) .site-nav-left-wrapper:after,
 .site-nav-main .site-nav-left-wrapper:after {
     right: 0;
-    background: linear-gradient(to right, color(var(--darkgrey) l(-5%) a(0)) 0%,color(var(--darkgrey) l(-5%)) 100%);
+/*    background: linear-gradient(to right, color(var(--darkgrey) l(-5%) a(0)) 0%,color(var(--darkgrey) l(-5%)) 100%); */
+    background: transparent;
 }
 
 .site-nav-left {
@@ -315,10 +321,10 @@ body {
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     margin-right: 10px;
-    padding: 10px 0 80px;
-    font-weight: 500;
+    padding: 10px 0;
+    font-weight: 400;
     letter-spacing: 0.2px;
-    text-transform: uppercase;
+ /*    text-transform: uppercase;*/
     white-space: nowrap;
 
     -ms-overflow-scrolling: touch;
@@ -342,7 +348,6 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     flex-shrink: 0;
     display: inline-block;
     margin-right: 32px;
-    padding: 12px 0;
     color: #fff;
     font-size: 1.7rem;
     line-height: 1.8rem;
@@ -357,40 +362,42 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 
 .site-nav-logo img {
     display: block;
-    width: auto;
-    height: 21px;
+    width: 141px;
+    height: 47px;
+    margin-bottom: 12px;
 }
 
-.site-home-header .site-nav-logo {
+/*.site-home-header .site-nav-logo {
     display: none;
-}
+} Why hide logo in navbar ? */
 
 .site-nav-content {
-    position: relative;
-    align-self: flex-start;
+    margin-left: auto; /*flex feature to stick items to the right of parent container */
 }
 
 .nav {
-    position: absolute;
+    position: relative;
     z-index: 1000;
     display: flex;
-    margin: 0 0 0 -12px;
     padding: 0;
+    margin: 0;
     list-style: none;
     transition: all 1.0s cubic-bezier(0.19, 1, 0.22, 1);
+
 }
 
 .nav li {
     display: block;
     margin: 0;
-    padding: 0;
+/*    padding: 12px 1.7rem 4px 1.7rem;*/
 }
 
 .nav li a {
     position: relative;
     display: block;
-    padding: 12px 12px;
-    color: #fff;
+    padding: 12px 0 4px;
+    margin: 0 1.7rem;
+    color: #887f95;
     opacity: 0.8;
     transition: opacity 0.35s ease-in-out;
 }
@@ -400,22 +407,44 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     opacity: 1;
 }
 
-.nav li a:before {
+/*Menu hover restyled*/
+.nav li a:after {
     content: "";
     position: absolute;
-    right: 100%;
-    bottom: 8px;
-    left: 12px;
-    height: 1px;
+    bottom: 5px;
+    left: 10%;
+    height: 2px;
+    width: 80%;
     background: #fff;
-    opacity: 0.25;
     transition: all 0.35s ease-in-out;
 }
 
-.nav li a:hover:before {
-    right: 12px;
-    opacity: 0.5;
+.nav li a:hover:after {
+    left: 0;
+    width: 100%;
+    bottom:1px;
+    background: #38c690;
 }
+/*styling of "get started" button */
+.site-nav-right > ul > li:first-child > a {  
+     background: #38c690; 
+     border: 1px solid transparent; 
+     color: #fff;
+     padding: 10px 30px;
+     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+     border-radius: 0.6rem;
+     -webkit-transition: box-shadow .25s ease, -webkit-transform .25s ease;
+     transition: box-shadow .25s ease, -webkit-transform .25s ease;
+     transition: box-shadow .25s ease, transform .25s ease;
+     transition: box-shadow .25s ease, transform .25s ease, -webkit-transform .25s ease; 
+
+}
+.site-nav-right > ul > li:first-child > a:hover{
+     background: #30a87a;
+     box-shadow: none;
+}
+.site-nav-right > ul > li:first-child > a::after{content: none;}
+
 
 .nav-post-title-active .nav {
     visibility: hidden;
@@ -452,16 +481,14 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 }
 
 .site-nav-right {
-    flex: 0 1 auto;
+    flex: 1 0 auto;
     display: flex;
-    align-items: center;
+    order: 1;
     justify-content: flex-end;
-    padding: 10px 0;
-    height: 64px;
+    margin-left: auto; /* necessary to break the flex with whitespace*/
 }
 
 .site-nav-right .nav {
-    position: relative;
     margin: 0;
 }
 
@@ -474,7 +501,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 }
 
 .site-nav-right .nav li:last-of-type a {
-    margin-right: -12px;
+/*    margin-right: -12px; WHAT FOR */
 }
 
 .social-links {
@@ -568,7 +595,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 
 @media (max-width: 700px) {
     .site-home-header .site-nav {
-        margin-left: -5vw;
+        margin-left: 0;
     }
 
     .site-nav-main {
@@ -581,10 +608,67 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
         padding-left: 5vw;
     }
 
-    .site-nav-right {
+/*    .site-nav-right {
         display: none;
-    }
+    } */
 }
+/* CSS-only hamburger */
+
+.site-nav label, #menu-toggle { display: none } 
+
+@media screen and (max-width: 900px){
+      .site-nav label {
+	    display: inline-block;
+            color: #887f95;
+	    background: #fffc;
+	    font-style: normal;
+	    font-size: 2em;
+            padding: 20px;
+            order: 2;
+            margin: 0 -20px;
+	    z-index: 1100;	
+            position: fixed;
+            right: 20px;
+            top: 0;
+	}
+/* toggle menu visiility upon hamburger click */
+       .site-nav > div > div > div {display:none;}
+       .site-nav .site-nav-right > ul > li {display:none;}
+       .site-nav #menu-toggle:checked ~ div > div > div {display:block;}	
+       .site-nav #menu-toggle:checked ~ .site-nav-right > ul > li {display:block;}	
+/* accomodate menu to stick to the left side */	
+       .nav { flex-direction: column;}
+       .site-nav-left-wrapper{
+	    position: fixed;
+	    top:0;
+	    left: 0;	
+	    background: #fff no-repeat 50%;
+            width: 100%;
+	}
+        li.nav-log-in > a   {padding: 12px 18px 4px;}
+
+       .site-nav-left{flex-direction: column;}
+       .site-nav-content {margin:0;}
+       .site-nav-left {
+	  flex-direction: column;
+	  margin: 0;
+	  padding: 10px 13px 10px 0;
+	}
+       .site-nav-right	{
+          position: fixed;
+	  margin:0;
+	  top:203px; /*for now*/
+          background: #fff no-repeat 50%;
+	  width: 100%;
+          left: 0;
+          justify-content: center;
+
+	}
+	
+}
+
+
+
 
 
 /* 6. Post Feed

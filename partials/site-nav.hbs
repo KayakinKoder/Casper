@@ -1,4 +1,8 @@
 <nav class="site-nav">
+{{!--  hamburger nav --}}
+    <label for="menu-toggle">&#9776;</label>
+    <input type="checkbox" id="menu-toggle">
+
     <div class="site-nav-left-wrapper">
         <div class="site-nav-left">
             {{#if @site.logo}}
@@ -32,9 +36,6 @@
                 <a class="rss-button" href="https://feedly.com/i/subscription/feed/{{@site.url}}/rss/" title="RSS" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
             {{/unless}}
         {{/if}}
-
-        {{#if @labs.members}}
-            <a class="subscribe-button" href="#subscribe">Subscribe</a>
-        {{/if}}
     </div>
+
 </nav>
